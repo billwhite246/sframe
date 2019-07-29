@@ -1,0 +1,70 @@
+# .htaccess的权限要设置成644
+# PHP路由访问必须配置该文件
+# Powered by Bill - s框架(sframe)
+# 2019年2月2日 12点14分
+
+#<IfModule mod_rewrite.c>
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FIELNAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# 下面这个一开就error500
+# 显式的规定对脚本和其它动态文件禁止使用缓存 
+# <FilesMatch ".(pl|php|cgi|spl|scgi|fcgi)$"> 
+# Header unset Cache-Control 
+# </FilesMatch> 
+
+#==============================安全配置开始======================================
+
+# 保护 htaccess 文件 
+#<Files .htaccess> 
+#    order allow,deny 
+#    deny from all 
+#</Files> 
+
+# 多种文件类型 
+# 目前用到的主要对以下文件实施访问保护
+# htaccess
+# xml
+<FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh|xml)$"> 
+Order Allow,Deny 
+Deny from all 
+</FilesMatch>
+
+# 禁止目录浏览 
+Options All -Indexes
+# 开放目录浏览
+# Options All +Indexes
+
+
+# proc/self/environ? 没门！ 
+RewriteCond %{QUERY_STRING} proc/self/environ [OR] 
+
+# 阻止脚本企图通过URL修改mosConfig值 
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|\%3D) [OR] 
+
+# 阻止脚本通过URL传递的base64_encode垃圾信息 
+RewriteCond %{QUERY_STRING} base64_encode.*(.*) [OR] 
+
+# 阻止在URL含有<script>标记的脚本 
+RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR] 
+
+# 阻止企图通过URL设置PHP的GLOBALS变量的脚本 
+RewriteCond %{QUERY_STRING} GLOBALS(=|[|\%[0-9A-Z]{0,2}) [OR] 
+
+# 阻止企图通过URL设置PHP的_REQUEST变量的脚本 
+RewriteCond %{QUERY_STRING} _REQUEST(=|[|\%[0-9A-Z]{0,2}) 
+
+# 把所有被阻止的请求转向到 403 禁止提示页面！ 
+RewriteRule ^(.*)$ index.php [F,L]
+
+#==============================安全配置结束======================================
+
+# 将403指向404迷惑
+# ErrorDocument 403 /404.php
+# ErrorDocument 404 /404.php
+
+#</IfModule>
+
