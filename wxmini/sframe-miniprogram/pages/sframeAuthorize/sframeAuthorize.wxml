@@ -1,0 +1,15 @@
+<view>
+  <view class="zhezao" hidden="{{flag}}">
+    <view class="t_w">
+      <!--弹出框开始-->
+      <view class="pop_view">
+        <image src="/images/authorize.jpg"></image>
+        <view>为了给你提供更好的服务，请点击下方的授权登陆按钮哦</view>
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登陆</button>
+      </view>
+      <!--弹出框结束-->
+    </view>
+  </view>
+</view>
+
+<!-- <view bindtap="show">点我显示</view> -->

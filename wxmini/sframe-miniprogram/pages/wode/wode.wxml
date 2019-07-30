@@ -1,0 +1,8 @@
+<!--pages/wode/wode.wxml-->
+<view>token = {{ token }}</view>
+<view>avatarUrl = {{ userInfo.avatarUrl }}</view>
+<view>city = {{ userInfo.city }}</view>
+<view>gender = {{ userInfo.gender }}</view>
+<view>language = {{ userInfo.language }}</view>
+<view>nickName = {{ userInfo.nickName }}</view>
+<view>province = {{ userInfo.province }}</view>

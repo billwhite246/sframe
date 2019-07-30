@@ -1,0 +1,45 @@
+.zhezao{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  background:rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+.t_w{
+  position:relative;
+}
+
+.pop_view{
+  width: 70%;
+  margin: 25% auto;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 4rpx;
+}
+
+.pop_view image{
+  width: 100%;
+}
+
+.pop_view view{
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #7F7F7F;
+  line-height: 40rpx;
+}
+
+.pop_view button{
+  width: 66%;
+  outline: none;
+  background-color: #2C8CF0;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 30rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+
